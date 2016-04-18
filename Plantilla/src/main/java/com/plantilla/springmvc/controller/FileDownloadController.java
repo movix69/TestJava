@@ -10,13 +10,17 @@ import java.net.URLConnection;
 import java.nio.charset.Charset;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.plantilla.springmvc.model.User;
 
 @Controller
 public class FileDownloadController {
@@ -26,9 +30,18 @@ public class FileDownloadController {
 	
 
 	@RequestMapping(value={"/","/Inicio"}, method = RequestMethod.GET)
-	public String getHomePage(ModelMap model) {
+	public String getHomePage(ModelMap model) {		
 		return "login/logout";
 	}
+	
+	@RequestMapping(value="/Logon",method = RequestMethod.POST)
+    public String onSubmit(@Valid User Reg, BindingResult result)
+    {		
+		if (result.hasErrors()) {
+            return "priceincrease";
+        }
+		return "login/logout";
+    }
 
 	/*
 	 * Download a file from 

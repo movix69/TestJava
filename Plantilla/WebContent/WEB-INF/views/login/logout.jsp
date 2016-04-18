@@ -14,7 +14,7 @@
 			<div class="login-container">
 				<div class="login-card">
 					<div class="login-form">
-						<c:url var="loginUrl" value="/login" />
+						<c:url var="loginUrl" value="/Logon" />
 						<form action="${loginUrl}" method="post" class="form-horizontal">
 <%-- 							<c:if test="${param.error != null}"> --%>
 <!-- 								<div class="alert alert-danger"> -->
@@ -28,7 +28,7 @@
 <%-- 							</c:if> --%>
 							<div class="input-group input-sm">
 								<label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-								<input type="text" class="form-control" id="username" name="ssoId" placeholder="Enter Username" required>
+								<input type="text" class="form-control" id="Email" name="Email" placeholder="Enter Email" required>
 							</div>
 							<div class="input-group input-sm">
 								<label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
