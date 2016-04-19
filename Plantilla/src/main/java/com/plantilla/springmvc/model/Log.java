@@ -21,19 +21,19 @@ public class Log implements Serializable {
 	private int logId;
 
 	@Column(name="Clase")
-	private Object clase;
+	private String clase;
 
 	@Column(name="Ensamblado")
-	private Object ensamblado;
+	private String ensamblado;
 
 	@Column(name="Fecha")
 	private Timestamp fecha;
 
 	@Column(name="Mensaje")
-	private Object mensaje;
+	private String mensaje;
 
 	@Column(name="Metodo")
-	private Object metodo;
+	private String metodo;
 
 	@Column(name="NivelLog")
 	private int nivelLog;
@@ -49,11 +49,11 @@ public class Log implements Serializable {
 		this.logId = logId;
 	}
 
-	public Object getClase() {
+	public String getClase() {
 		return this.clase;
 	}
 
-	public void setClase(Object clase) {
+	public void setClase(String clase) {
 		this.clase = clase;
 	}
 
@@ -61,7 +61,7 @@ public class Log implements Serializable {
 		return this.ensamblado;
 	}
 
-	public void setEnsamblado(Object ensamblado) {
+	public void setEnsamblado(String ensamblado) {
 		this.ensamblado = ensamblado;
 	}
 
@@ -77,7 +77,7 @@ public class Log implements Serializable {
 		return this.mensaje;
 	}
 
-	public void setMensaje(Object mensaje) {
+	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
 
@@ -85,7 +85,7 @@ public class Log implements Serializable {
 		return this.metodo;
 	}
 
-	public void setMetodo(Object metodo) {
+	public void setMetodo(String metodo) {
 		this.metodo = metodo;
 	}
 
