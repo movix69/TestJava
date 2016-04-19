@@ -47,9 +47,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Librerias/sqljdbc42.jar</name>
+			<name>WebContent/WEB-INF/lib/sqljdbc42.jar</name>
 			<type>1</type>
-			<location>E:/git/Plantilla/Librerias/sqljdbc42.jar</location>
+			<location>E:/git/Plantilla/WebContent/WEB-INF/lib/sqljdbc42.jar</location>
 		</link>
 	</linkedResources>
 </projectDescription>
