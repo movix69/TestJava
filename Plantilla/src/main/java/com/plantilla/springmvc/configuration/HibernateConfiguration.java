@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
 
-	@Autowired
+    @Autowired
     private Environment environment;
 
     @Bean
@@ -60,3 +60,5 @@ public class HibernateConfiguration {
        return txManager;
     }
 }
+
+

@@ -13,26 +13,23 @@ import org.springframework.stereotype.Repository;
 
 import com.plantilla.springmvc.model.User;
 @Repository("userDao")
-//@Transactional
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	public User findById(int id) {
 		return getByKey(id);
 	}
 
-//	public User findByLoginUser(String email) {
+//	public User findByEmail(String email) {
 //		Criteria crit = createEntityCriteria();
-//		crit.add(Restrictions.eq("LoginUser", email));
+//		crit.add(Restrictions.eq("email", email));
 //		return (User) crit.uniqueResult();
 //	}
-//	@Autowired	
-//	private SessionFactory sessionFactory;
 	
 	@SuppressWarnings("unchecked")
 	public User findByEmail(String email) {
 
 		List<User> users;// = new ArrayList<User>();
-		users = getSession2().createQuery("from Users where Email=?").setParameter(0, email)
+		users = getSession().createQuery("from User where email=?").setParameter(0, email)
 				.list();
 		if (users.size() > 0) {
 			return users.get(0);
@@ -40,12 +37,6 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 			return null;
 		}
 
-	}
-	@Autowired
-	private SessionFactory sessionFactory;	
-
-	protected Session getSession2() {
-		return sessionFactory.getCurrentSession();
 	}
 	
 //	@SuppressWarnings("unchecked")

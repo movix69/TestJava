@@ -12,6 +12,10 @@ import java.nio.charset.Charset;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
@@ -20,8 +24,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.plantilla.springmvc.configuration.AppConfig;
 import com.plantilla.springmvc.model.User;
-import com.plantilla.springmvc.service.CustomUserDetailsService;
+import com.plantilla.springmvc.service.UserService;
 
 @Controller
 public class FileDownloadController {
@@ -39,8 +44,12 @@ public class FileDownloadController {
     public String onSubmit(@Valid User Reg, BindingResult result)
     {		
 //		if (result.hasErrors()) {
-			CustomUserDetailsService UserServ=new CustomUserDetailsService();
-		    UserServ.loadUserByUsername(Reg.getEmail());
+//			CustomUserDetailsService UserServ=new CustomUserDetailsService();			
+		//ApplicationContext context = new ClassPathXmlApplicationContext("app-config.xml");
+		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		UserService UserServ = (UserService) context.getBean("userService");
+		UserServ.findByEmail(Reg.getEmail());
+		context.close();
 //            return "priceincrease";
 //        }
 		return "login/logout";
