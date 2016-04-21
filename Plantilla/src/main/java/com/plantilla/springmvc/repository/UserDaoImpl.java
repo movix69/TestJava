@@ -1,6 +1,6 @@
 package com.plantilla.springmvc.repository;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -29,10 +29,10 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 //	private SessionFactory sessionFactory;
 	
 	@SuppressWarnings("unchecked")
-	public User findByEmail(String username) {
+	public User findByEmail(String email) {
 
-		List<User> users = new ArrayList<User>();
-		users = getSession2().createQuery("from Users where Email=?").setParameter(0, username)
+		List<User> users;// = new ArrayList<User>();
+		users = getSession2().createQuery("from Users where Email=?").setParameter(0, email)
 				.list();
 		if (users.size() > 0) {
 			return users.get(0);
