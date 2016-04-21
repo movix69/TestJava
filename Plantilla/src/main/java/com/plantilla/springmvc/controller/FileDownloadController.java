@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.plantilla.springmvc.model.User;
+import com.plantilla.springmvc.service.CustomUserDetailsService;;
 
 @Controller
 public class FileDownloadController {
@@ -37,9 +38,11 @@ public class FileDownloadController {
 	@RequestMapping(value="/Logon",method = RequestMethod.POST)
     public String onSubmit(@Valid User Reg, BindingResult result)
     {		
-		if (result.hasErrors()) {
-            return "priceincrease";
-        }
+//		if (result.hasErrors()) {
+			CustomUserDetailsService UserServ=new CustomUserDetailsService();
+			UserServ.loadUserByUsername(Reg.getEmail());
+//            return "priceincrease";
+//        }
 		return "login/logout";
     }
 
