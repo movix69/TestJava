@@ -1,32 +1,28 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
     <!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
-		
- 		<intercept-url pattern="download/internal" access="hasRole('ROLE_Admin')" />
+	
+<!--  		<intercept-url pattern="/login" access="permitAll" /> -->
+		<intercept-url pattern="/index/**" access="hasRole('ROLE_Admin')" />
+ 		<intercept-url pattern="/download/**" access="hasRole('ROLE_Admin')" />
 		
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
 		
-		<form-login 
-		    login-page="/login" 
-		    default-target-url="/logon" 
-			authentication-failure-url="/login?error" 
-			username-parameter="email"
-			password-parameter="password" />
+		<form-login login-page="/login" 
+		    default-target-url="/index" 
+			authentication-failure-url="/login?error"/>
 		<logout logout-success-url="/logout"  />
-		<!-- enable csrf protection -->
 		<csrf/>
+		<!-- enable csrf protection -->		
 	</http>
-	
 	<authentication-manager>
     	<authentication-provider user-service-ref="userDetailsService" /> 
 	</authentication-manager> 
-	<beans:bean id="userDetailsService" class="com.plantilla.springmvc.service.MyUserDetailsService"/>
+	<beans:bean id="userDetailsService" class="com.plantilla.springmvc.service.MyUserDetailsService"/>	
 </beans:beans>

@@ -17,8 +17,12 @@ import javax.validation.Valid;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -29,6 +33,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.plantilla.springmvc.configuration.AppConfig;
 import com.plantilla.springmvc.model.User;
@@ -43,29 +48,37 @@ public class LoginController {
 	
 
 	@RequestMapping(value={"/","/login"}, method = RequestMethod.GET)
-	public String getHomePage(ModelMap model) {		
+	public String getHomePage(ModelMap model) {			
 		return "login/login";
 	}
 	
 	@RequestMapping(value={"/index"}, method = RequestMethod.GET)
-	public String Index(ModelMap model) {		
-		return "login/index";
+	public String Index(ModelMap model) {
+		model.addAttribute("user", getPrincipal());
+		return "login/index";	
 	}
 	
 	@RequestMapping(value="/logon",method = RequestMethod.POST)
-    public String onSubmit(@Valid User Reg, BindingResult result)
-    {				
-//		if (!result.hasErrors()) {
-//			for(ObjectError error : result.getAllErrors()) {
-//	            System.out.println(error.toString());
-//	        }
-//		}
+    public ModelAndView onSubmit(@Valid User Reg, BindingResult result)
+    {			
+		ModelAndView model = new ModelAndView();
+		if (result.hasErrors()) {
+			for(ObjectError error : result.getAllErrors()) {
+	            System.out.println(error.toString());
+	        }
+		}else{
 			AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 			UserDetailsService UserServ = (UserDetailsService)context.getBean("userDetailsService");
-			UserServ.loadUserByUsername(Reg.getEmail());
-			context.close();
-		//}
-		return "login/index";
+			UserDetails user= UserServ.loadUserByUsername(Reg.getEmail());			
+			Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+			SecurityContextHolder.getContext().setAuthentication(auth);
+			context.close();			
+			  
+			  model.addObject("user", getPrincipal());			
+			  model.addObject("msg", "You've been logged out successfully.");
+			  model.setViewName("login/index");
+		}
+			  return model;
     }
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -76,12 +89,24 @@ public class LoginController {
         }
         return "redirect:/login";
     }
+	
+	private String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+ 
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
 
 	/*
 	 * Download a file from 
 	 *   - inside project, located in resources folder.
 	 *   - outside project, located in File system somewhere. 
-	 */
+	 */	
 	@RequestMapping(value="/download/{type}", method = RequestMethod.GET)
 	public void downloadFile(HttpServletResponse response, @PathVariable("type") String type) throws IOException {
 	

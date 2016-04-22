@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="form-container">
-		<h1>Welcome to FileDownloader Example</h1>
+		<h1>Welcome to FileDownloader Example ${user}</h1>
 		
 		Click on below links to see FileDownload in action.<br/><br/>
 		
