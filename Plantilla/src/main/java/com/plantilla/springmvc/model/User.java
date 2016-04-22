@@ -2,6 +2,8 @@ package com.plantilla.springmvc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 
@@ -19,7 +21,8 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="UserID")
 	private int userID;
-
+	
+	@NotNull(message="No puede estar vacio")
 	@Column(name="Email")
 	private String email;
 
@@ -56,7 +59,7 @@ public class User implements Serializable {
 	public String getEmail() {
 		return this.email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}

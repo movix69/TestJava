@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -16,43 +17,64 @@ import javax.validation.Valid;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.plantilla.springmvc.configuration.AppConfig;
 import com.plantilla.springmvc.model.User;
+import com.plantilla.springmvc.service.MyUserDetailsService;
 import com.plantilla.springmvc.service.UserService;
 
 @Controller
-public class FileDownloadController {
+public class LoginController {
 	
 	private static final String INTERNAL_FILE="irregular-verbs-list.pdf";
 	private static final String EXTERNAL_FILE_PATH="C:/mytemp/SpringMVCHibernateManyToManyCRUDExample.zip";
 	
 
-	@RequestMapping(value={"/","/Inicio"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/","/login"}, method = RequestMethod.GET)
 	public String getHomePage(ModelMap model) {		
-		return "login/logout";
+		return "login/login";
 	}
 	
-	@RequestMapping(value="/Logon",method = RequestMethod.POST)
+	@RequestMapping(value={"/index"}, method = RequestMethod.GET)
+	public String Index(ModelMap model) {		
+		return "login/index";
+	}
+	
+	@RequestMapping(value="/logon",method = RequestMethod.POST)
     public String onSubmit(@Valid User Reg, BindingResult result)
-    {		
-//		if (result.hasErrors()) {
-//			CustomUserDetailsService UserServ=new CustomUserDetailsService();			
-		//ApplicationContext context = new ClassPathXmlApplicationContext("app-config.xml");
-		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		UserService UserServ = (UserService) context.getBean("userService");
-		UserServ.findByEmail(Reg.getEmail());
-		context.close();
-//            return "priceincrease";
-//        }
-		return "login/logout";
+    {				
+//		if (!result.hasErrors()) {
+//			for(ObjectError error : result.getAllErrors()) {
+//	            System.out.println(error.toString());
+//	        }
+//		}
+			AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+			UserDetailsService UserServ = (UserDetailsService)context.getBean("userDetailsService");
+			UserServ.loadUserByUsername(Reg.getEmail());
+			context.close();
+		//}
+		return "login/index";
+    }
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){    
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login";
     }
 
 	/*

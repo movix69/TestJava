@@ -19,25 +19,26 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return getByKey(id);
 	}
 
-//	public User findByEmail(String email) {
-//		Criteria crit = createEntityCriteria();
-//		crit.add(Restrictions.eq("email", email));
-//		return (User) crit.uniqueResult();
-//	}
-	
 	@SuppressWarnings("unchecked")
 	public User findByEmail(String email) {
-
-		List<User> users;// = new ArrayList<User>();
-		users = getSession().createQuery("from User where email=?").setParameter(0, email)
-				.list();
-		if (users.size() > 0) {
-			return users.get(0);
-		} else {
-			return null;
-		}
-
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("email", email));
+		return (User) crit.uniqueResult();
 	}
+	
+//	@SuppressWarnings("unchecked")
+//	public User findByEmail(String email) {
+//
+//		List<User> users;// = new ArrayList<User>();
+//		users = getSession().createQuery("from User where email=?").setParameter(0, email)
+//				.list();
+//		if (users.size() > 0) {
+//			return users.get(0);
+//		} else {
+//			return null;
+//		}
+//
+//	}
 	
 //	@SuppressWarnings("unchecked")
 //	public List<User> findAllUser() {
