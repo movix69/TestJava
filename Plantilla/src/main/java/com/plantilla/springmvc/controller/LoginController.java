@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,8 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.plantilla.springmvc.configuration.AppConfig;
 import com.plantilla.springmvc.model.User;
-import com.plantilla.springmvc.service.MyUserDetailsService;
-import com.plantilla.springmvc.service.UserService;
+
 
 @Controller
 public class LoginController {
@@ -54,7 +49,7 @@ public class LoginController {
 	
 	@RequestMapping(value={"/index"}, method = RequestMethod.GET)
 	public String Index(ModelMap model) {
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", getPrincipal());		
 		return "login/index";	
 	}
 	
@@ -72,13 +67,12 @@ public class LoginController {
 			UserDetails user= UserServ.loadUserByUsername(Reg.getEmail());			
 			Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(auth);
-			context.close();			
-			  
-			  model.addObject("user", getPrincipal());			
-			  model.addObject("msg", "You've been logged out successfully.");
-			  model.setViewName("login/index");
+			context.close();			  
+			model.addObject("user", getPrincipal());			
+			model.addObject("msg", "You've been logged out successfully.");
+			model.setViewName("login/index");
 		}
-			  return model;
+			return model;
     }
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)

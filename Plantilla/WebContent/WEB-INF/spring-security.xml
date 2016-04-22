@@ -11,9 +11,6 @@
 		<intercept-url pattern="/index/**" access="hasRole('ROLE_Admin')" />
  		<intercept-url pattern="/download/**" access="hasRole('ROLE_Admin')" />
 		
-		<!-- access denied page -->
-		<access-denied-handler error-page="/403" />
-		
 		<form-login login-page="/login" 
 		    default-target-url="/index" 
 			authentication-failure-url="/login?error"/>
