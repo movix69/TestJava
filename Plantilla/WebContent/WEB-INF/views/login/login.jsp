@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -40,6 +41,11 @@
 								<input type="submit"
 									class="btn btn-block btn-primary btn-default" value="Log in">
 							</div>
+							<sec:authorize access="hasRole('ROLE_Admin')">
+
+								This content will only be visible to users who have the "supervisor" authority in their list of <tt>GrantedAuthority</tt>s.
+
+							</sec:authorize>		
 						</form>
 					</div>
 				</div>
