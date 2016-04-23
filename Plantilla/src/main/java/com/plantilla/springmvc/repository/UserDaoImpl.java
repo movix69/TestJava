@@ -1,8 +1,7 @@
 package com.plantilla.springmvc.repository;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,12 +17,12 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	public User findById(int id) {
 		return getByKey(id);
 	}
-
-	@SuppressWarnings("unchecked")
-	public User findByEmail(String email) {
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("email", email));
-		return (User) crit.uniqueResult();
+	
+	public User findByEmail(String data) {
+		ArrayList<String[]> outerArr = new ArrayList<String[]>();
+		String[] myDataFilter= {"email",data};
+		outerArr.add(myDataFilter);
+		return (User) findBy(outerArr).get(0);
 	}
 	
 //	@SuppressWarnings("unchecked")
@@ -39,11 +38,4 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 //		}
 //
 //	}
-	
-//	@SuppressWarnings("unchecked")
-//	public List<User> findAllUser() {
-//		Criteria criteria = createEntityCriteria();
-//		return (List<User>) criteria.list();
-//	}
-
 }

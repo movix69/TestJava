@@ -6,8 +6,12 @@ import java.lang.reflect.ParameterizedType;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.Criteria;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractDao<PK extends Serializable, T> {
 
@@ -42,5 +46,21 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 	protected Criteria createEntityCriteria() {
 		return getSession().createCriteria(persistentClass);
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<T> findAll() {
+		Criteria criteria = createEntityCriteria();
+		return (List<T>) criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> findBy(ArrayList<String[]> fieldNameFilterName) {			
+		Criteria crit = createEntityCriteria();
+		for(int i=0;i<fieldNameFilterName.size();i++){
+			   String[] myString= new String[2]; 
+			   myString=fieldNameFilterName.get(i);
+			   crit.add(Restrictions.eq(myString[0], myString[1]));
+		}
+		return (List<T>)crit.list();//crit.uniqueResult();
+	}		
 }
