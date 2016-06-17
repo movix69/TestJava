@@ -19,10 +19,16 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 	
 	public User findByEmail(String data) {
+		List<User> users;
 		ArrayList<String[]> outerArr = new ArrayList<String[]>();
 		String[] myDataFilter= {"email",data};
 		outerArr.add(myDataFilter);
-		return (User) findBy(outerArr).get(0);
+		users=findBy(outerArr);		
+		if (users.size() > 0) {
+			return users.get(0);
+		} else {
+			return null;
+		}
 	}
 	
 //	@SuppressWarnings("unchecked")

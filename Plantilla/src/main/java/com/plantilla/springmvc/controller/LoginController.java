@@ -53,7 +53,7 @@ public class LoginController {
 		return "login/index";	
 	}
 	
-	@RequestMapping(value="/logon",method = RequestMethod.POST)
+	@RequestMapping(value="/logon")//,method = RequestMethod.POST)
     public ModelAndView onSubmit(@Valid User Reg, BindingResult result)
     {			
 		ModelAndView model = new ModelAndView();
