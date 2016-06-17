@@ -50,17 +50,21 @@ public class LoginController {
 	@RequestMapping(value={"/index"}, method = RequestMethod.GET)
 	public String Index(ModelMap model) {
 		model.addAttribute("user", getPrincipal());		
+		model.addAttribute("msg", "You've been logged out successfully.");
 		return "login/index";	
 	}
 	
 	@RequestMapping(value="/logon")//,method = RequestMethod.POST)
     public ModelAndView onSubmit(@Valid User Reg, BindingResult result)
     {			
-		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			for(ObjectError error : result.getAllErrors()) {
 	            System.out.println(error.toString());
 	        }
+			ModelAndView model = new ModelAndView();
+			model.addObject("user", getPrincipal());
+			model.addObject("error", "Errores login");
+			return model;
 		}else{
 			AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 			UserDetailsService UserServ = (UserDetailsService)context.getBean("userDetailsService");
@@ -68,11 +72,11 @@ public class LoginController {
 			Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			context.close();			  
-			model.addObject("user", getPrincipal());			
-			model.addObject("msg", "You've been logged out successfully.");
-			model.setViewName("login/index");
+			//model.addObject("user", getPrincipal());			
+			//model.addObject("msg", "You've been logged out successfully.");
+			//model.setViewName("login/index");
+			return new ModelAndView("redirect:" + "index");
 		}
-			return model;
     }
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
