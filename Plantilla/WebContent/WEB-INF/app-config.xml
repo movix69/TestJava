@@ -11,6 +11,9 @@
 
    <!-- Scans the classpath of this application for @Components to deploy as beans -->
    <context:component-scan base-package="com.plantilla.springmvc.configuration" />
+   <context:component-scan base-package="com.plantilla.springmvc.service" />
+   <context:component-scan base-package="com.plantilla.springmvc.configuration" />
+   <context:component-scan base-package="org.springframework.security.core.userdetails.UserDetailsService" />   
 
    <!-- Configures the @Controller programming model -->
    <mvc:annotation-driven/>

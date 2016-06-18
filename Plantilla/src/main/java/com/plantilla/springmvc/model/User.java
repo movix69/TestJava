@@ -43,7 +43,7 @@ public class User implements Serializable {
 			@JoinColumn(name="Roles_RoleID")
 			}
 		)
-	private List<Role> roles;
+	private List<Roles> roles;
 
 	public User() {
 	}
@@ -80,11 +80,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
+	public List<Roles> getRoles() {
 		return this.roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import  com.plantilla.springmvc.model.User;
 import com.plantilla.springmvc.repository.UserDao;
-import  com.plantilla.springmvc.model.Role;
+import  com.plantilla.springmvc.model.Roles;
 
 @Service("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
@@ -42,7 +42,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	private List<GrantedAuthority> getGrantedAuthorities(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-		for (Role userProfile : user.getRoles()) {
+		for (Roles userProfile : user.getRoles()) {
 			System.out.println("UserProfile : " + userProfile);
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + userProfile.getName()));
 		}

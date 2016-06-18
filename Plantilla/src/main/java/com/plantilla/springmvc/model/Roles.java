@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="Roles")
-@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
-public class Role implements Serializable {
+@NamedQuery(name="Role.findAll", query="SELECT r FROM Roles r")
+public class Roles implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,7 +27,7 @@ public class Role implements Serializable {
 	@ManyToMany(mappedBy="roles")
 	private List<User> users;
 
-	public Role() {
+	public Roles() {
 	}
 
 	public int getRoleID() {
