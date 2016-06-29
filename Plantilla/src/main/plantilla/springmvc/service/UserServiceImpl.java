@@ -1,12 +1,12 @@
-package com.plantilla.springmvc.service;
+package main.plantilla.springmvc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.plantilla.springmvc.repository.UserDao;
+import main.plantilla.springmvc.repository.UserDao;
 //import com.plantilla.springmvc.repository.UserDaoImpl;
-import com.plantilla.springmvc.model.User;
+import main.plantilla.springmvc.model.User;
 
 @Service("userService")
 @Transactional

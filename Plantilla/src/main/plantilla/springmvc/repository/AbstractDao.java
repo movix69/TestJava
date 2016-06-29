@@ -1,4 +1,4 @@
-package com.plantilla.springmvc.repository;
+package main.plantilla.springmvc.repository;
 
 import java.io.Serializable;
 

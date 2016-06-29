@@ -1,6 +1,6 @@
-package com.plantilla.springmvc.repository;
+package main.plantilla.springmvc.repository;
 
-import com.plantilla.springmvc.model.User;
+import main.plantilla.springmvc.model.User;
 
 public interface UserDao {
 

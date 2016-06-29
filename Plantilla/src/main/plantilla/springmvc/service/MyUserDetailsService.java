@@ -1,4 +1,4 @@
-package com.plantilla.springmvc.service;
+package main.plantilla.springmvc.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import  com.plantilla.springmvc.model.User;
-import com.plantilla.springmvc.repository.UserDao;
-import  com.plantilla.springmvc.model.Roles;
+import  main.plantilla.springmvc.model.User;
+import main.plantilla.springmvc.repository.UserDao;
+import  main.plantilla.springmvc.model.Roles;
 
 @Service("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {

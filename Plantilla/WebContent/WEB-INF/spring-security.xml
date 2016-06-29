@@ -21,5 +21,5 @@
 	<authentication-manager>
     	<authentication-provider user-service-ref="userDetailsService" /> 
 	</authentication-manager> 
-	<beans:bean id="userDetailsService" class="com.plantilla.springmvc.service.MyUserDetailsService"/>	
+	<beans:bean id="userDetailsService" class="main.plantilla.springmvc.service.MyUserDetailsService"/>	
 </beans:beans>

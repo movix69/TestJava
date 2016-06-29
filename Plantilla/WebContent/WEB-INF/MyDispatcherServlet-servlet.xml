@@ -8,7 +8,7 @@
   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
  <!-- Enabling Spring beans auto-discovery -->
- <context:component-scan base-package="com.plantilla.springmvc.controller" />
+ <context:component-scan base-package="main.plantilla.springmvc.controller" />
 
  <!-- Enabling Spring MVC configuration through annotations -->
  <mvc:annotation-driven />

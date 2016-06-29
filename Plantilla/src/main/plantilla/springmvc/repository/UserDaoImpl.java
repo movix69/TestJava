@@ -1,4 +1,4 @@
-package com.plantilla.springmvc.repository;
+package main.plantilla.springmvc.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.plantilla.springmvc.model.User;
+import main.plantilla.springmvc.model.User;
 //import com.plantilla.springmvc.model.Roles;
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {

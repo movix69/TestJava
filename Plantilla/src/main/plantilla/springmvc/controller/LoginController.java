@@ -1,4 +1,4 @@
-package com.plantilla.springmvc.controller;
+package main.plantilla.springmvc.controller;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.plantilla.springmvc.configuration.AppConfig;
-import com.plantilla.springmvc.model.User;
+import main.plantilla.springmvc.configuration.AppConfig;
+import main.plantilla.springmvc.model.User;
 
 
 @Controller

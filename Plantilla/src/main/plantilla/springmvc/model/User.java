@@ -1,4 +1,4 @@
-package com.plantilla.springmvc.model;
+package main.plantilla.springmvc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;

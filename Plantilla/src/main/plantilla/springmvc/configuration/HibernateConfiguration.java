@@ -1,4 +1,4 @@
-package com.plantilla.springmvc.configuration;
+package main.plantilla.springmvc.configuration;
 
 import java.util.Properties;
 
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "com.plantilla.springmvc.configuration" })
+@ComponentScan({ "main.plantilla.springmvc.configuration" })
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
 
@@ -29,7 +29,7 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.plantilla.springmvc.model" });
+        sessionFactory.setPackagesToScan(new String[] { "main.plantilla.springmvc.model" });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
      }

@@ -1,6 +1,6 @@
-package com.plantilla.springmvc.service;
+package main.plantilla.springmvc.service;
 
-import com.plantilla.springmvc.model.User;
+import main.plantilla.springmvc.model.User;
 
 public interface UserService {
 
